@@ -3,37 +3,30 @@
 <head>
 <style>
 html, body, div {
-    height: 100%;
+
     background-color: #004b7f;
     color: #fff;
 }
 
-#parent
-{
-    position:relative;
-    border: 1px solid black;
-}
-
-#child
-{
-    position: absolute;
-    top: 50%;
-    /* adjust top up half the height of a single line */
-    margin-top: -0.5em;
-    /* force content to always be a single line */
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-    text-overflow: ellipsis;
-    text-align: right;
+div {
+	margin-top: 100px;
+    margin-left: 200px;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    /* Rotate div */
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
 }
 
 </style>
 </head>
 <body>
 
-
-
-
+<div class="rotate">
+<p>Arbeiðsloysi<p>
+<p>9%</p>
+</p>
 </body>
 </html>
