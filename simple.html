@@ -2,19 +2,38 @@
 <html>
 <head>
 <style>
-body {
-    background-color: linen;
+html, body, div {
+    height: 100%;
+    background-color: #004b7f;
+    color: #fff;
 }
-h1 {
-    color: maroon;
-    margin-left: 40px;
-} 
+
+#parent
+{
+    position:relative;
+    border: 1px solid black;
+}
+
+#child
+{
+    position: absolute;
+    top: 50%;
+    /* adjust top up half the height of a single line */
+    margin-top: -0.5em;
+    /* force content to always be a single line */
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    text-overflow: ellipsis;
+    text-align: right;
+}
+
 </style>
 </head>
 <body>
 
-<h1>This is a heading</h1>
-<p>This is a paragraph.</p>
+
+
 
 </body>
 </html>
