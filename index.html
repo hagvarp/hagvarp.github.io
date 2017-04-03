@@ -17,6 +17,12 @@
     <script src="lib/js/highstock-release/highstock.js"></script>
     <script src="lib/js/highstock-release/modules/exporting.js"></script>
 
+    <!--<script src="https://code.highcharts.com/maps/highmaps.js"></script>  -->
+    <script src="https://code.highcharts.com/maps/modules/map.js"></script>   
+    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+
+
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
@@ -1077,6 +1083,234 @@
                     startAnimatingChart4();
                 });
             }
+
+
+
+
+
+
+//---------------------------------------------------------
+//                                CHART 4b
+//---------------------------------------------------------
+
+            var chart4b;
+            var chart4bData;
+            var chart4bCreatedSeries;
+            var chart4b_last_month;
+            var chart4bTimeout0;
+            var chart4bTimeout1;
+            var chart4bTimeout2;
+            var chart4bTimeout3;
+
+
+
+            //Chart 4b specific functions
+            function drawChart4b() {
+
+                var jsonStatData = chart4bData;
+                var jsonStatUtflutningurData= chart4b1Data;
+
+
+                //Extrat Data From JSON Stat
+
+                ds = JSONstat(jsonStatData).Dataset(0);
+
+
+                ds1 = JSONstat(jsonStatUtflutningurData).Dataset(0);
+
+
+
+              var Nordstreymoyar = (ds.Data({"measure": "FUL", "region":"NS"}, false))/(ds1.Data({"measure": "AF", "district of residence":"NS"}, false))*100;
+              var Sudurstreymoyar = (ds.Data({"measure": "FUL", "region":"SS"}, false))/ds1.Data({"measure": "AF", "district of residence":"SS"}, false)*100;
+              var Suduroyar = (ds.Data({"measure": "FUL", "region":"SU"}, false))/ds1.Data({"measure": "AF", "district of residence":"SU"}, false)*100;
+              var Sandoyar = (ds.Data({"measure": "FUL", "region":"SA"}, false))/ds1.Data({"measure": "AF", "district of residence":"SA"}, false)*100;
+              var Vaga = (ds.Data({"measure": "FUL", "region":"VA"}, false))/ds1.Data({"measure": "AF", "district of residence":"VA"}, false)*100;
+              var Eysturoyar = (ds.Data({"measure": "FUL", "region":"EY"}, false))/ds1.Data({"measure": "AF", "district of residence":"EY"}, false)*100;
+              var Nordoya = (ds.Data({"measure": "FUL", "region":"NO"}, false))/ds1.Data({"measure": "AF", "district of residence":"NO"}, false)*100;
+
+          var data = [
+                  ['Nordstreymoyar', Nordstreymoyar],
+                  ['Sudurstreymoyar', Sudurstreymoyar],
+                  ['Suduroyar', Suduroyar],
+                  ['Sandoyar', Sandoyar],
+                  ['Vaga', Vaga],
+                  ['Eysturoyar', Eysturoyar],
+                  ['Nordoya', Nordoya] 
+              ];
+
+
+
+              $.getJSON('syslur7.geo.json', function (geojson) {
+
+                  // Initiate the chart
+                  $('#chart4b').highcharts('Map', {
+                    title: {
+                          text: ''
+                      },
+                    credits: {
+                        enabled: false
+                      },
+                    chart: {
+                        backgroundColor: "rgba(255, 255, 255, 0)",
+                    },
+
+
+                    exporting: {
+                        enabled: false
+                    },                              
+                      legend: {
+                        enabled: false,
+                          title: {
+                              text: "Arbeiðsfjøldin (%) í mun til fólkatalið"
+                          }
+                        },
+                      colorAxis: {
+
+
+                      },
+                      tooltip: {
+                              valueDecimals: 1,
+                              valueSuffix: '%',
+
+                      },
+                    plotOptions: {
+                        map: {
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.value:.1f}%',
+                                className: 'MyDataLabelTooltip'
+                            }
+                        }
+                    },                                
+                      series: [{
+                          data: data,
+                          mapData: geojson,
+                          joinBy: ['name', 0],
+                          keys: ['name', 'value'],
+                          name: 'Sýsla',
+                          states: {
+                              hover: {
+                                  color: '#BADA55'
+                              }
+                          }
+                      }]
+                     
+                  });
+              });
+
+
+            }
+
+            function loadDataAndBuildChart4b() {
+                POST("http://statbank.hagstova.fo/api/v1/fo/H2/AM/AM02/al_aldkysy_t.px", {
+					   "query": [
+					    {
+					      "code": "measure",
+					      "selection": {
+					        "filter": "item",
+					        "values": [
+					          "FUL"
+					        ]
+					      }
+					    },
+					    {
+					      "code": "region",
+					      "selection": {
+					        "filter": "item",
+					        "values": [
+					          "NO",
+					          "EY",
+					          "NS",
+					          "SS",
+					          "VA",
+					          "SA",
+					          "SU"
+					        ]
+					      }
+					    },
+					    {
+					      "code": "time",
+					      "selection": {
+						  "filter": "top",
+                    	  "values": [
+                      	  "1"
+					        ]
+					      }
+					    }
+					  ],
+                    "response": {
+                        "format": "json-stat"
+
+                    }
+
+                },function(data) {
+                    chart4bData = data;
+                    loadDataAndBuildChart4b1();
+                } );
+            }
+
+
+            function loadDataAndBuildChart4b1() {
+                POST("http://statbank.hagstova.fo/api/v1/fo/H2/AM/AM01/afk_afavbst.px", {
+                      "query": [
+					    {
+					      "code": "district of residence",
+					      "selection": {
+					        "filter": "item",
+					        "values": [
+					          "NO",
+					          "EY",
+					          "NS",
+					          "SS",
+					          "VA",
+					          "SA",
+					          "SU"
+					        ]
+					      }
+					    },                      
+					    {
+					      "code": "year",
+					      "selection": {
+					        "filter": "top",
+					        "values": [
+					          "1"
+					        ]
+					      }
+					    },
+					    {
+					      "code": "unit",
+					      "selection": {
+					        "filter": "item",
+					        "values": [
+					          "TAL"
+					        ]
+					      }
+					    },
+					    {
+					      "code": "measure",
+					      "selection": {
+					        "filter": "item",
+					        "values": [
+					          "AF"
+					        ]
+					      }
+					    }
+					  ],
+                    "response": {
+                        "format": "json-stat"
+
+                    }
+
+                },function(data) {
+                    chart4b1Data = data;
+                    drawChart4b();
+                } );
+            }
+
+
+
+
+
 
 
 
@@ -3083,6 +3317,7 @@
                 loadDataAndBuildChart2();
                 loadDataAndBuildChart3();
                 loadDataAndBuildChart4();
+                loadDataAndBuildChart4b();
                 loadDataAndBuildChart5();
                 loadDataAndBuildChart6();
                 loadDataAndBuildChart7();
@@ -3152,6 +3387,16 @@
                 <p>Árstíðarjavnað. 16-66 ár</p>
                     <div>
                         <div id="chart4"></div>
+                    </div>
+            </div>
+        </section>
+		<section data-state="arbeidsloysi" data-background="assets/arbeidsloysi.jpg">
+            <div class="infobox blue left">
+                <div class="background"></div>
+                <h2>Arbeiðsloysi<h2/>
+                <p>Arbeiðsloysistølini fyri øki í landinum</p>
+                    <div>
+                        <div id="chart4b"></div>
                     </div>
             </div>
         </section>
@@ -3364,7 +3609,12 @@
             });
 
 
+
+
+
         </script>
+
+
 
 
 </body>
