@@ -385,20 +385,15 @@
 					var n = d.getFullYear();
 
                 	chart2.series[2].update({
-                		color: '#ffffff',                		
-				        pointIntervalUnit: 'year',
 				        zoneAxis: 'x',
 				        zones: [{
-				            value: Date.UTC(n-1),
+				            value: Date.parse(n-1),
 				            color: '#ffffff'
 				        },{
 				            color: 'rgba(255,255,255,0)'
 				        }]                		                		
 
-                	});
-
-               	
-
+                	});             	
 
 					chart2.update({
                     	xAxis: {
@@ -668,17 +663,15 @@
 					var n = d.getFullYear();
 
                 	chart3.series[2].update({
-                		color: '#ffffff',
-				        pointIntervalUnit: 'year',
 				        zoneAxis: 'x',
 				        zones: [{
-				            value: Date.UTC(n-1),
-				            color: '#ffffff'
+				            value: Date.parse(n-1),
+				            color: 'rgba(255,255,255,1)'
 				        },{
 				            color: 'rgba(255,255,255,0)'
 				        }]                		                		
 
-                	});
+                	}); 
 
                	
 
