@@ -377,12 +377,22 @@
                     chart2.addSeries(chart2CreatedSeries[2]);
                 }, 4000);
 
-                chart2Timeout3 =setTimeout(function () {
-                    chart2.update({xAxis: {
-                        min: null,
-                        max: null
-                    }});
-                }, 25000);
+                chart2Timeout3 = setTimeout(function () {
+
+
+                	chart2.series[2].update({
+
+                	})
+
+
+					chart2.update({
+                    	xAxis: {
+	                        min: null,
+	                        max: 1480550400000,
+                        }
+                    });
+                }, 5000);
+                //}, 25000);
             }
 
             //Chart 2 specific functions
@@ -397,9 +407,6 @@
                 m = ds.Dimension("month").id;
 
                 //Format Data
-
-
-
                 var tilflytingdata = [];
                 var fraflytingdata = [];
                 var nettoflytingdata = [];
@@ -423,6 +430,7 @@
 
                     }
                 }
+
 
                 var chart2_last_month = tilflytingdata[tilflytingdata.length - 1];
                 chart2_last_month = chart2_last_month[0];
@@ -2229,10 +2237,17 @@
                 }, 6000);
 
                 chart8Timeout4 =setTimeout(function () {
-                    chart8.update({xAxis: {
-                        min: null,
-                        max: null,
-                    }});
+
+					var d = new Date();
+					var n = d.getFullYear();
+
+					chart8.update({
+                    	xAxis: {
+	                        min: null,
+	                        max: Date.parse(n)-86400000,
+                        }
+                    });
+
                 }, 25000);
             }
 
@@ -2559,10 +2574,18 @@
                 }, 6000);
 
                 chart13Timeout4 =setTimeout(function () {
-                    chart13.update({xAxis: {
-                        min: null,
-                        max: null,
-                    }});
+
+					var d = new Date();
+					var n = d.getFullYear();
+
+					chart13.update({
+                    	xAxis: {
+	                        min: null,
+	                        max: Date.parse(n)-86400000,
+                        }
+                    });
+
+
                 }, 25000);
             }
 
@@ -3500,7 +3523,7 @@
             <div class="infobox blue left">
                 <div class="background"></div>
                 <h2>Gistingar<h2/>
-                <p></p>
+                <p>Nætur</p>
                     <div>
                         <div id="chart9"></div>
                     </div>
