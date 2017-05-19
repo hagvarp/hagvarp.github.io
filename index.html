@@ -1903,10 +1903,29 @@
                 }, 4000);
 
                 chart7Timeout3 =setTimeout(function () {
-                    chart7.update({xAxis: {
-                        min: null,
-                        max:null,
-                    }});
+
+
+					var d = new Date();
+					var n = d.getFullYear();
+
+                	chart7.series[2].update({
+				        zoneAxis: 'x',
+				        zones: [{
+				            value: Date.parse(n-1),
+				            color: '#ffffff'
+				        },{
+				            color: 'rgba(255,255,255,0)'
+				        }]                		                		
+
+                	});             	
+
+					chart7.update({
+                    	xAxis: {
+	                        min: null,
+	                        max: Date.parse(n)-86400000,
+                        }
+                    });
+
                 }, 25000);
             }
 
