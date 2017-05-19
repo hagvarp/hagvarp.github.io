@@ -646,11 +646,36 @@
                 }, 4000);
 
                 chart3Timeout3 =setTimeout(function () {
-                    chart3.update({xAxis: {
-                        min: null,
-                        max: null
-                    }});
-                }, 25000);
+					
+                	chart3.series[2].update({
+                		lineWidth: 5,
+                		color: '#FF0000',
+
+				        pointIntervalUnit: 'year',
+				        zoneAxis: 'x',
+				        zones: [{
+				            value: Date.UTC(2015, 5),
+				            color: '#ffffff'
+				        }, {
+				            value: Date.UTC(2015, 8),
+				            color: '#000FF0'
+				        }, {
+				            color: 'rgba(255,255,255,0)'
+				        }]                		                		
+
+                	});
+
+               	
+					var d = new Date();
+					var n = d.getFullYear();
+
+					chart3.update({
+                    	xAxis: {
+	                        min: null,
+	                        max: Date.parse(n)-86400000,
+                        }
+                    });
+                }, 5000);
             }
 
             //Chart 3 specific functions
@@ -3523,7 +3548,7 @@
             <div class="infobox blue left">
                 <div class="background"></div>
                 <h2>Gistingar<h2/>
-                <p> Tal av gistináttum</p>
+                <p> Nætur</p>
                     <div>
                         <div id="chart9"></div>
                     </div>
