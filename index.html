@@ -380,19 +380,35 @@
                 chart2Timeout3 = setTimeout(function () {
 
 
-                	chart2.series[2].update({
 
-                	})
+					var d = new Date();
+					var n = d.getFullYear();
+
+                	chart2.series[2].update({
+				        pointIntervalUnit: 'year',
+				        zoneAxis: 'x',
+				        zones: [{
+				            value: Date.UTC(n-1),
+				            color: '#ffffff'
+				        },{
+				            color: 'rgba(255,255,255,0)'
+				        }]                		                		
+
+                	});
+
+               	
 
 
 					chart2.update({
                     	xAxis: {
 	                        min: null,
-	                        max: 1480550400000,
+	                        max: Date.parse(n)-86400000,
                         }
                     });
-                }, 5000);
-                //}, 25000);
+
+
+                }, 25000);
+
             }
 
             //Chart 2 specific functions
@@ -647,27 +663,23 @@
 
                 chart3Timeout3 =setTimeout(function () {
 					
-                	chart3.series[2].update({
-                		lineWidth: 5,
-                		color: '#FF0000',
+					var d = new Date();
+					var n = d.getFullYear();
 
+                	chart3.series[2].update({
 				        pointIntervalUnit: 'year',
 				        zoneAxis: 'x',
 				        zones: [{
-				            value: Date.UTC(2015, 5),
+				            value: Date.UTC(n-1),
 				            color: '#ffffff'
-				        }, {
-				            value: Date.UTC(2015, 8),
-				            color: '#000FF0'
-				        }, {
+				        },{
 				            color: 'rgba(255,255,255,0)'
 				        }]                		                		
 
                 	});
 
                	
-					var d = new Date();
-					var n = d.getFullYear();
+
 
 					chart3.update({
                     	xAxis: {
@@ -675,7 +687,7 @@
 	                        max: Date.parse(n)-86400000,
                         }
                     });
-                }, 5000);
+                }, 25000);
             }
 
             //Chart 3 specific functions
@@ -3548,7 +3560,7 @@
             <div class="infobox blue left">
                 <div class="background"></div>
                 <h2>Gistingar<h2/>
-                <p> Nætur</p>
+                <p>Gistinætur</p>
                     <div>
                         <div id="chart9"></div>
                     </div>
