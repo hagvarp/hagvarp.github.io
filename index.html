@@ -1685,7 +1685,7 @@
                     trendur = ds.Data({ "value mode": "TR", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
 
                     for (var j = 0; j < lontakarar.length; j++) {
-                         var month = m[j];
+                         var month = m[j].substring(1);
 
                         yaxislontakarar.push[lontakarar[j]];
                         lontakarardata.push([Date.parse(year[i] + "-" + month), (lontakarar[j]/1000)]);
