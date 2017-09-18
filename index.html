@@ -1972,10 +1972,10 @@
                 for (var i = 0; i < fLen; i++) {
 
 
-                    innflutningur = ds.Data({ "BEC-groups": "0", "year": ds.Dimension("year").id[i + yearinnflutningurutflutningurdifference] }, false).filter(function(n) { return n; });
+                    innflutningur = ds.Data({ "BEC-groups": "TOT", "year": ds.Dimension("year").id[i + yearinnflutningurutflutningurdifference] }, false).filter(function(n) { return n; });
 
 
-                    utflutningur = dsutflutningur.Data({ "unit": "0", "commodity group": "0", "year": dsutflutningur.Dimension("year").id[i] }, false).filter(function(n) { return n; });
+                    utflutningur = dsutflutningur.Data({ "unit": "DKK", "commodity group": "TOT", "year": dsutflutningur.Dimension("year").id[i] }, false).filter(function(n) { return n; });
 
 
                     for (var j = 0; j < utflutningur.length; j++) {
@@ -1988,7 +1988,6 @@
                         if(month.length == 1) {
                             month = "0" + month;
                         }
-
 
                         innflutningurdata.push([Date.parse(year[i] + "-" + month), -innflutningur[j]/1000]);
                         utflutningurdata.push([Date.parse(year[i] + "-" + month), utflutningur[j]/1000]);
@@ -2157,27 +2156,16 @@
                               "selection": {
                                 "filter": "item",
                                 "values": [
-                                  "0"
+                                  "TOT"
                                 ]
                               }
                             },
                         {
                           "code": "month",
                           "selection": {
-                            "filter": "item",
+                            "filter": "all",
                             "values": [
-                              "1",
-                              "2",
-                              "3",
-                              "4",
-                              "5",
-                              "6",
-                              "7",
-                              "8",
-                              "9",
-                              "10",
-                              "11",
-                              "12"
+                              "*"
                             ]
                           }
                         }
@@ -2202,7 +2190,7 @@
                           "selection": {
                             "filter": "item",
                             "values": [
-                              "0"
+                              "DKK"
                             ]
                           }
                         },
@@ -2211,27 +2199,16 @@
                               "selection": {
                                 "filter": "item",
                                 "values": [
-                                  "0"
+                                  "TOT"
                                 ]
                               }
                             },
                         {
                           "code": "month",
                           "selection": {
-                            "filter": "item",
+                            "filter": "all",
                             "values": [
-                              "1",
-                              "2",
-                              "3",
-                              "4",
-                              "5",
-                              "6",
-                              "7",
-                              "8",
-                              "9",
-                              "10",
-                              "11",
-                              "12"
+                              "*"
                             ]
                           }
                         }
@@ -2323,16 +2300,16 @@
                 var alifiskurdata = [];
 
                 for (var i = 0; i < fLen; i++) {
-                    var onnurfiskaslog = ds.Data({"commodity group": "48", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
-                    var toskur = ds.Data({"commodity group": "1", "year": ds.Dimension("year").id[i] }, false);
-                    var hysa = ds.Data({"commodity group": "9", "year": ds.Dimension("year").id[i] }, false);
-                    var upsi = ds.Data({"commodity group": "14", "year": ds.Dimension("year").id[i] }, false);
-                    var makrelur = ds.Data({"commodity group": "40", "year": ds.Dimension("year").id[i] }, false);
-                    var sild = ds.Data({"commodity group": "35", "year": ds.Dimension("year").id[i] }, false);
-                    var svartkjaftur = ds.Data({"commodity group": "30", "year": ds.Dimension("year").id[i] }, false);
-                    var laksur = ds.Data({"commodity group": "20", "year": ds.Dimension("year").id[i] }, false);
-                    var sil = ds.Data({"commodity group": "26", "year": ds.Dimension("year").id[i] }, false);
-                    var raekjur = ds.Data({"commodity group": "44", "year": ds.Dimension("year").id[i] }, false);
+                    var onnurfiskaslog = ds.Data({"commodity group": "080", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
+                    var toskur = ds.Data({"commodity group": "001", "year": ds.Dimension("year").id[i] }, false);
+                    var hysa = ds.Data({"commodity group": "003", "year": ds.Dimension("year").id[i] }, false);
+                    var upsi = ds.Data({"commodity group": "002", "year": ds.Dimension("year").id[i] }, false);
+                    var makrelur = ds.Data({"commodity group": "051", "year": ds.Dimension("year").id[i] }, false);
+                    var sild = ds.Data({"commodity group": "050", "year": ds.Dimension("year").id[i] }, false);
+                    var svartkjaftur = ds.Data({"commodity group": "053", "year": ds.Dimension("year").id[i] }, false);
+                    var laksur = ds.Data({"commodity group": "011", "year": ds.Dimension("year").id[i] }, false);
+                    var sil = ds.Data({"commodity group": "030", "year": ds.Dimension("year").id[i] }, false);
+                    var raekjur = ds.Data({"commodity group": "067", "year": ds.Dimension("year").id[i] }, false);
 
                     for (var j = 0; j < onnurfiskaslog.length; j++) {
                         var month = m[j];
@@ -2528,7 +2505,7 @@
                             "selection": {
                                 "filter": "item",
                                 "values": [
-                                    "0"
+                                    "DKK"
                                 ]
                             }
                         },
@@ -2537,37 +2514,26 @@
                           "selection": {
                             "filter": "item",
                             "values": [
-                              "0",
-                              "1",
-                              "9",
-                              "14",
-                              "20",
-                              "26",
-                              "30",
-                              "35",
-                              "40",
-                              "44",
-                              "48"
+                              "TOT",
+                              "001",
+                              "003",
+                              "002",
+                              "011",
+                              "030",
+                              "053",
+                              "050",
+                              "051",
+                              "067",
+                              "080"
                             ]
                           }
                         },
                         {
                             "code": "month",
                             "selection": {
-                                "filter": "item",
+                                "filter": "all",
                                 "values": [
-                                    "1",
-                                    "2",
-                                    "3",
-                                    "4",
-                                    "5",
-                                    "6",
-                                    "7",
-                                    "8",
-                                    "9",
-                                    "10",
-                                    "11",
-                                    "12"
+                                    "*"
                                 ]
                             }
                         }
