@@ -950,10 +950,7 @@
                     var unemployment = ds.Data({ "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
 
                     for (var j = 0; j < unemployment.length; j++) {
-                        var month = m[j];
-                        if(month.length == 1) {
-                            month = "0" + month;
-                        }
+                        var month = m[j].substring(1);
                         unemploymentdata.push([Date.parse(year[i] + "-" + month), unemployment[j]]);
                     }
                 }
@@ -1117,18 +1114,18 @@
                             "selection": {
                                 "filter": "item",
                                 "values": [
-                                    "1",
-                                    "2",
-                                    "3",
-                                    "4",
-                                    "5",
-                                    "6",
-                                    "7",
-                                    "8",
-                                    "9",
-                                    "10",
-                                    "11",
-                                    "12"
+                                    "M01",
+                                    "M02",
+                                    "M03",
+                                    "M04",
+                                    "M05",
+                                    "M06",
+                                    "M07",
+                                    "M08",
+                                    "M09",
+                                    "M10",
+                                    "M11",
+                                    "M12"
                                 ]
                             }
                         }
@@ -1289,7 +1286,7 @@
 					      }
 					    },
 					    {
-					      "code": "time",
+					      "code": "month",
 					      "selection": {
 						  "filter": "top",
                     	  "values": [
@@ -2835,20 +2832,9 @@
                         {
                           "code": "month",
                           "selection": {
-                            "filter": "item",
+                            "filter": "all",
                             "values": [
-                              "1",
-                              "2",
-                              "3",
-                              "4",
-                              "5",
-                              "6",
-                              "7",
-                              "8",
-                              "9",
-                              "10",
-                              "11",
-                              "12"
+                              "*"
                             ]
                             }
                         }
