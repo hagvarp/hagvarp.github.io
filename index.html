@@ -2623,10 +2623,10 @@
                 var upsidata = [];
 
                 for (var i = 0; i < fLen; i++) {
-                    var annarbotnfiskur = ds.Data({"species": "1", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
-                    var toskur = ds.Data({"species": "2", "year": ds.Dimension("year").id[i] }, false);
-                    var hysa = ds.Data({"species": "3", "year": ds.Dimension("year").id[i] }, false);
-                    var upsi = ds.Data({"species": "6", "year": ds.Dimension("year").id[i] }, false);
+                    var annarbotnfiskur = ds.Data({"species": "DEMERSAL_TOTAL", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
+                    var toskur = ds.Data({"species": "46", "year": ds.Dimension("year").id[i] }, false);
+                    var hysa = ds.Data({"species": "15", "year": ds.Dimension("year").id[i] }, false);
+                    var upsi = ds.Data({"species": "49", "year": ds.Dimension("year").id[i] }, false);
 
                     for (var j = 0; j < annarbotnfiskur.length; j++) {
                         var month = m[j];
@@ -2822,10 +2822,10 @@
                           "selection": {
                             "filter": "item",
                             "values": [
-                              "1",
-                              "2",
-                              "3",
-                              "6"
+                              "DEMERSAL_TOTAL",
+                              "46",
+                              "15",
+                              "49"
                             ]
                           }
                         },
