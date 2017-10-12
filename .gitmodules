@@ -10,3 +10,6 @@
 [submodule "lib/font/hagstova.fo.nts"]
 	path = lib/font/hagstova.fo.nts
 	url = https://github.com/hagstovan/hagstova.fo.nts.git
+[submodule "lib/js/highmaps-release"]
+	path = lib/js/highmaps-release
+	url = https://github.com/highcharts/highmaps-release.git
