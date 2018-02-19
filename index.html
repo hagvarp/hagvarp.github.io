@@ -1195,7 +1195,7 @@
 
 
 
-              $.getJSON('syslur7.geo.json', function (geojson) {
+              $.getJSON('utm.regions.geo.json', function (geojson) {
 
                   // Initiate the chart
                   $('#chart4b').highcharts('Map', {
@@ -1241,8 +1241,8 @@
                       series: [{
                           data: data,
                           mapData: geojson,
-                          joinBy: ['name', 0],
-                          keys: ['name', 'value'],
+                          joinBy: ['label', 0],
+                          keys: ['label', 'value'],
                           name: 'Sýsla',
                           states: {
                               hover: {
