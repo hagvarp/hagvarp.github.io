@@ -1175,13 +1175,13 @@
 
 
 
-              var Nordstreymoyar = (ds.Data({"measure": "FUL", "region":"NS"}, false))/(ds1.Data({"measure": "AF", "district of residence":"NS"}, false))*100;
-              var Sudurstreymoyar = (ds.Data({"measure": "FUL", "region":"SS"}, false))/ds1.Data({"measure": "AF", "district of residence":"SS"}, false)*100;
-              var Suduroyar = (ds.Data({"measure": "FUL", "region":"SU"}, false))/ds1.Data({"measure": "AF", "district of residence":"SU"}, false)*100;
-              var Sandoyar = (ds.Data({"measure": "FUL", "region":"SA"}, false))/ds1.Data({"measure": "AF", "district of residence":"SA"}, false)*100;
-              var Vaga = (ds.Data({"measure": "FUL", "region":"VA"}, false))/ds1.Data({"measure": "AF", "district of residence":"VA"}, false)*100;
-              var Eysturoyar = (ds.Data({"measure": "FUL", "region":"EY"}, false))/ds1.Data({"measure": "AF", "district of residence":"EY"}, false)*100;
-              var Nordoya = (ds.Data({"measure": "FUL", "region":"NO"}, false))/ds1.Data({"measure": "AF", "district of residence":"NO"}, false)*100;
+              var Nordstreymoyar = (ds.Data({"measure": "FUL", "region":"NS"}, false))/(ds1.Data({"measure": "AF", "region":"NS"}, false))*100;
+              var Sudurstreymoyar = (ds.Data({"measure": "FUL", "region":"SS"}, false))/ds1.Data({"measure": "AF", "region":"SS"}, false)*100;
+              var Suduroyar = (ds.Data({"measure": "FUL", "region":"SU"}, false))/ds1.Data({"measure": "AF", "region":"SU"}, false)*100;
+              var Sandoyar = (ds.Data({"measure": "FUL", "region":"SA"}, false))/ds1.Data({"measure": "AF", "region":"SA"}, false)*100;
+              var Vaga = (ds.Data({"measure": "FUL", "region":"VA"}, false))/ds1.Data({"measure": "AF", "region":"VA"}, false)*100;
+              var Eysturoyar = (ds.Data({"measure": "FUL", "region":"EY"}, false))/ds1.Data({"measure": "AF", "region":"EY"}, false)*100;
+              var Nordoya = (ds.Data({"measure": "FUL", "region":"NO"}, false))/ds1.Data({"measure": "AF", "region":"NO"}, false)*100;
 
           var data = [
                   ['Nordstreymoyar', Nordstreymoyar],
@@ -1310,7 +1310,7 @@
                 POST("https://statbank.hagstova.fo/api/v1/fo/H2/AM/AM01/afk_afavbst.px", {
                       "query": [
 					    {
-					      "code": "district of residence",
+					      "code": "region",
 					      "selection": {
 					        "filter": "item",
 					        "values": [
