@@ -1177,6 +1177,7 @@
               var Eysturoyar = (ds.Data({"measure": "FUL", "region":"EY"}, false))/ds1.Data({"measure": "AF", "region":"EY"}, false)*100;
               var Nordoya = (ds.Data({"measure": "FUL", "region":"NO"}, false))/ds1.Data({"measure": "AF", "region":"NO"}, false)*100;
 
+
           var data = [
                   ['Nordstreymoyar', Nordstreymoyar],
                   ['Sudurstreymoyar', Sudurstreymoyar],
@@ -1965,7 +1966,7 @@
                     innflutningur = ds.Data({ "BEC-groups": "TOT", "year": ds.Dimension("year").id[i + yearinnflutningurutflutningurdifference] }, false).filter(function(n) { return n; });
 
 
-                    utflutningur = dsutflutningur.Data({ "unit": "DKK", "commodity group": "TOT", "year": dsutflutningur.Dimension("year").id[i] }, false).filter(function(n) { return n; });
+                    utflutningur = dsutflutningur.Data({ "unit": "DKK", "commodity groups": "TOT", "year": dsutflutningur.Dimension("year").id[i] }, false).filter(function(n) { return n; });
 
 
                     for (var j = 0; j < utflutningur.length; j++) {
@@ -1974,6 +1975,9 @@
                         yaxisutflutningur.push[-utflutningur[j]];
 
                         var month = m[j];
+
+                        month = m[j].replace("M", "");
+
 
                         if(month.length == 1) {
                             month = "0" + month;
@@ -2185,7 +2189,7 @@
                           }
                         },
                         {
-                              "code": "commodity group",
+                              "code": "commodity groups",
                               "selection": {
                                 "filter": "item",
                                 "values": [
@@ -2290,28 +2294,40 @@
                 var alifiskurdata = [];
 
                 for (var i = 0; i < fLen; i++) {
-                    var onnurfiskaslog = ds.Data({"commodity group": "080", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
-                    var toskur = ds.Data({"commodity group": "001", "year": ds.Dimension("year").id[i] }, false);
-                    var hysa = ds.Data({"commodity group": "003", "year": ds.Dimension("year").id[i] }, false);
-                    var upsi = ds.Data({"commodity group": "002", "year": ds.Dimension("year").id[i] }, false);
-                    var makrelur = ds.Data({"commodity group": "051", "year": ds.Dimension("year").id[i] }, false);
-                    var sild = ds.Data({"commodity group": "050", "year": ds.Dimension("year").id[i] }, false);
-                    var svartkjaftur = ds.Data({"commodity group": "053", "year": ds.Dimension("year").id[i] }, false);
-                    var laksur = ds.Data({"commodity group": "011", "year": ds.Dimension("year").id[i] }, false);
-                    var sil = ds.Data({"commodity group": "030", "year": ds.Dimension("year").id[i] }, false);
-                    var raekjur = ds.Data({"commodity group": "067", "year": ds.Dimension("year").id[i] }, false);
+
+
+                    
+
+                    var onnurfiskaslog = ds.Data({"commodity groups": "080", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });                    
+                    var toskur = ds.Data({"commodity groups": "001", "year": ds.Dimension("year").id[i] }, false);
+                    var hysa = ds.Data({"commodity groups": "003", "year": ds.Dimension("year").id[i] }, false);
+                    var upsi = ds.Data({"commodity groups": "002", "year": ds.Dimension("year").id[i] }, false);
+                    var makrelur = ds.Data({"commodity groups": "051", "year": ds.Dimension("year").id[i] }, false);
+                    var sild = ds.Data({"commodity groups": "050", "year": ds.Dimension("year").id[i] }, false);
+                    var svartkjaftur = ds.Data({"commodity groups": "053", "year": ds.Dimension("year").id[i] }, false);
+                    var laksur = ds.Data({"commodity groups": "011", "year": ds.Dimension("year").id[i] }, false);
+                    var sil = ds.Data({"commodity groups": "030", "year": ds.Dimension("year").id[i] }, false);
+                    var raekjur = ds.Data({"commodity groups": "067", "year": ds.Dimension("year").id[i] }, false);
 
                     for (var j = 0; j < onnurfiskaslog.length; j++) {
                         var month = m[j];
+
+                        month = m[j].replace("M", "");
+
                         if(month.length == 1) {
                             month = "0" + month;
                         }
                         onnurfiskaslogdata.push([Date.parse(year[i] + "-" + month), (onnurfiskaslog[j] + raekjur[j])*0.001]);
+
+                        console.log(onnurfiskaslogdata);
+
                         toskurhysaupsidata.push([Date.parse(year[i] + "-" + month), (toskur[j] + hysa[j] + upsi[j])*0.001]);
                         alifiskurdata.push([Date.parse(year[i] + "-" + month), (laksur[j] + sil[j])*0.001]);
                         makrelursildsvartkjafturdata.push([Date.parse(year[i] + "-" + month), (makrelur[j] + sild[j] + svartkjaftur[j])*0.001]);
                     }
                 }
+
+
 
 
 
@@ -2500,7 +2516,7 @@
                             }
                         },
                         {
-                          "code": "commodity group",
+                          "code": "commodity groups",
                           "selection": {
                             "filter": "item",
                             "values": [
@@ -2623,6 +2639,7 @@
 
                     for (var j = 0; j < annarbotnfiskur.length; j++) {
                         var month = m[j];
+                        month = m[j].replace("M", "");                        
                         if(month.length == 1) {
                             month = "0" + month;
                         }
@@ -3046,7 +3063,7 @@
                             "selection": {
                                 "filter": "item",
                                 "values": [
-                                    "0"
+                                    "STAYS"
                                 ]
                             }
                         },
