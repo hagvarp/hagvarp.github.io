@@ -2504,305 +2504,6 @@
 
 
 
-//---------------------------------------------------------
-//                                CHART 13
-//---------------------------------------------------------
-            var chart13;
-            var chart13Data;
-            var chart13CreatedSeries;
-            var chart13_last_month;
-            var chart13Timeout0;
-            var chart13Timeout1;
-            var chart13Timeout2;
-            var chart13Timeout3;
-            var chart13Timeout4;
-
-            function startAnimatingChart13() {
-                clearTimeout(chart13Timeout0);
-                clearTimeout(chart13Timeout1);
-                clearTimeout(chart13Timeout2);
-                clearTimeout(chart13Timeout3);
-                clearTimeout(chart13Timeout4);
-
-                drawChart13();
-
-                chart13Timeout0 = setTimeout(function() {
-                    chart13.addSeries(chart13CreatedSeries[0]);
-                }, 100);
-                chart13Timeout1 = setTimeout(function() {
-                    chart13.addSeries(chart13CreatedSeries[1]);
-                }, 2000);
-                chart13Timeout2 = setTimeout(function() {
-                    chart13.addSeries(chart13CreatedSeries[2]);
-                }, 4000);
-                chart13Timeout3 = setTimeout(function() {
-                    chart13.addSeries(chart13CreatedSeries[3]);
-                }, 6000);
-
-                chart13Timeout4 =setTimeout(function () {
-
-					var d = new Date();
-					var n = d.getFullYear();
-
-					chart13.update({
-                    	xAxis: {
-	                        min: null,
-	                        max: Date.parse(n)-86400000,
-                        }
-                    });
-
-
-                }, 25000);
-            }
-
-            //Chart 13 specific functions
-            function drawChart13() {
-
-                var jsonStatData = chart13Data;
-                //Extrat Data From JSON Stat
-                ds = JSONstat(jsonStatData).Dataset(0);
-                t = ds.Dimension("year").length - 1;
-                year = ds.Dimension("year").id;
-                var fLen = year.length;
-                m = ds.Dimension("month").id;
-
-            //Format Data
-
-                var annarbotnfiskurdata = [];
-                var toskurdata = [];
-                var hysadata = [];
-                var upsidata = [];
-
-                for (var i = 0; i < fLen; i++) {
-                    var annarbotnfiskur = ds.Data({"species": "DEMERSAL_TOTAL", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
-                    var toskur = ds.Data({"species": "46", "year": ds.Dimension("year").id[i] }, false);
-                    var hysa = ds.Data({"species": "15", "year": ds.Dimension("year").id[i] }, false);
-                    var upsi = ds.Data({"species": "49", "year": ds.Dimension("year").id[i] }, false);
-
-                    for (var j = 0; j < annarbotnfiskur.length; j++) {
-                        var month = m[j];
-                        month = m[j].replace("M", "");                        
-                        if(month.length == 1) {
-                            month = "0" + month;
-                        }
-                        annarbotnfiskurdata.push([Date.parse(year[i] + "-" + month), (annarbotnfiskur[j] - toskur[j] - hysa[j] - upsi[j])]);
-                        toskurdata.push([Date.parse(year[i] + "-" + month), (toskur[j])]);
-                        hysadata.push([Date.parse(year[i] + "-" + month), (hysa[j])]);
-                        upsidata.push([Date.parse(year[i] + "-" + month), (upsi[j])]);
-                    }
-                }
-
-
-
-
-                var chart13_last_month = annarbotnfiskurdata[annarbotnfiskurdata.length - 1];
-                chart13_last_month = chart13_last_month[0];
-
-                //Build Series
-                var createdSeries = [
-                {
-                    name: "Toskur",
-                    data: toskurdata,
-                    color: "#9b1212",
-                    tooltip: {
-                        valueDecimals: 1
-                    },
-                    legendIndex:1,
-                    index: 3
-                },
-                {
-                    name: "Hýsa",
-                    data: hysadata,
-                    color: "#f7b538",
-                    tooltip: {
-                        valueDecimals: 1
-                    },
-                    legendIndex:2,
-                    index: 2
-                },
-                {
-                    name: "Upsi",
-                    data: upsidata,
-                    color: "#fb6107",
-                    tooltip: {
-                        valueDecimals: 1
-                    },
-                    legendIndex:3,
-                    index: 1
-                },
-                {
-                    name: "Annar botnfiskur",
-                    data: annarbotnfiskurdata,
-                    color: "#ecf0f1",
-                    tooltip: {
-                        valueDecimals: 1
-                    },
-                    legendIndex:4,
-                    index: 0
-                }
-                ];
-                chart13CreatedSeries = createdSeries;
-
-
-                //Build Title
-                var title = ds.label;
-
-                //Build subtitle
-                var subtitle = ds.source;
-
-                //Build Tooltip
-                var tooltipFunction = function () {
-                    var s = "<b>" + Highcharts.dateFormat("%Y-%b", this.x) + "</b>";
-                    $.each(this.points,
-                        function (i, point) {
-                            s += "<br/>" + point.series.name + ": " + Highcharts.numberFormat(point.y, 0.0, ",", ".");
-                        });
-
-                    return s;
-                }
-
-                //Build Chart
-                $("#chart13").highcharts({
-                    credits: {
-                        enabled: false
-                    },
-                    chart: {
-                        type: "column",
-                        backgroundColor: "rgba(255, 255, 255, 0)",
-                        borderWidth: 0,
-                        renderTo: "container",
-                        events: {
-                            load: function () {
-                                chart13 = this;
-                            }
-
-                        }
-                    },
-                    rangeSelector: {
-                        enabled: false
-                    },
-
-                    exporting: {
-                        enabled: false
-                    },
-
-                    navigator: {
-                        enabled: false
-                    },
-                    title: {
-                        text: ""
-                    },
-                    legend: {
-                        layout: "horizontal",
-                        align: "center",
-                        verticalAlign: "top",
-
-                        itemStyle: {
-                            color: "#fff",
-                            fontWeight: "normal"
-                        }
-                    },
-                    xAxis: {
-                        title: {
-                            enabled: false
-                        },
-                        type: "datetime",
-                        min: chart13_last_month - 65743595833,
-                        max: chart13_last_month,
-                        labels: {
-                            style: {
-                                color: "#fff",
-                                fontSize: "11px"
-                            }
-                        },
-                        showLastLabel: true,
-
-                    },
-                    yAxis: {
-                        title: {
-                            text: "",
-                            style: {
-                                color: "#fff",
-                                fontWeight: "normal",
-                                fontSize: "12px"
-                            }
-                        },
-                        min: 0,
-                        lineColor: "#fff",
-                        tickColor: "#fff",
-                        labels: {
-                            formatter: function () {
-                                return Highcharts.numberFormat(this.value, 0);
-                            },
-                            style: {
-                                color: "#fff",
-                                font: "11px"
-                            }
-                        },
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    plotOptions: {
-                        column: {
-                            stacking: "normal",
-                            borderWidth: 0
-                        },
-                        series: {
-                            stacking: "normal",
-                            showInNavigator: true,
-                            dataGrouping:{
-                                enabled: true,
-                                type: "column",
-                                approximation: "sum",
-                                units:[ ["year", [null]]]
-                            },
-                            pointPadding: 0,
-                            groupPadding: 0.2
-                        },
-
-                    },
-                    series: []
-                });
-            }
-
-            function loadDataAndBuildChart13() {
-                POST("https://statbank.hagstova.fo/api/v1/fo/H2/VV/VV01/fv_avrnogd.px", {
-                    "query": [
-                        {
-                          "code": "species",
-                          "selection": {
-                            "filter": "item",
-                            "values": [
-                              "DEMERSAL_TOTAL",
-                              "46",
-                              "15",
-                              "49"
-                            ]
-                          }
-                        },
-                        {
-                          "code": "month",
-                          "selection": {
-                            "filter": "all",
-                            "values": [
-                              "*"
-                            ]
-                            }
-                        }
-                      ],
-                    "response": {
-                        "format": "json-stat"
-
-                    }
-                },function(data) {
-                    chart13Data = data;
-                    drawChart13();
-                    startAnimatingChart13();
-                } );
-            }
-
-
 
 
 
@@ -3318,10 +3019,10 @@
 <div class="reveal">
     <div class="slides">
 
-        <section data-background="assets/folkatalid.jpg" data-autoslide="4000">
+        <section data-background="assets/folkatal_tvoroyri.jpg" data-autoslide="4000">
             <h1><img src="assets/hagstova_logo_white.svg" alt="Hagstova Føroya" class="logo" />Fólkatal</h1>
         </section>
-        <section data-state="folkatal" data-background="assets/folkatalid.jpg">
+        <section data-state="folkatal" data-background="assets/folkatal_tvoroyri.jpg">
             <div class="infobox blue right">    
                 <div class="background"></div>
                     <h2>Fólkatal<h2/>
@@ -3332,10 +3033,10 @@
             </div>
         </section>
 
-        <section data-background="assets/tilfraflyting.jpg" data-autoslide="4000">
+        <section data-background="assets/atlantic.jpg" data-autoslide="4000">
             <h1><img src="assets/hagstova_logo_white.svg" alt="Hagstova Føroya" class="logo" />Til- og fráflyting</h1>
         </section>
-        <section data-state="tilfraflyting" data-background="assets/tilfraflyting.jpg">
+        <section data-state="tilfraflyting" data-background="assets/atlantic.jpg">
             <div class="infobox blue">
                 <div class="background"></div>
                 <h2>Til- og fráflyting
@@ -3368,7 +3069,7 @@
             <div class="infobox blue left">
                 <div class="background"></div>
                 <h2>Arbeiðsloysi<h2/>
-                <p>Árstíðarjavnað. 16-66 ár</p>
+                <p>16-66 ár</p>
                     <div>
                         <div id="chart4"></div>
                     </div>
@@ -3414,10 +3115,10 @@
             </div>
         </section>
 
-        <section data-background="assets/innutflutningur.jpg" data-autoslide="4000">
+        <section data-background="assets/bingjur.jpg" data-autoslide="4000">
             <h1><img src="assets/hagstova_logo_white.svg" alt="Hagstova Føroya" class="logo" />Inn- og útflutningur</h1>
         </section>
-        <section data-state="innutflutningur" data-background="assets/innutflutningur.jpg">
+        <section data-state="innutflutningur" data-background="assets/bingjur.jpg">
             <div class="infobox blue">
                 <div class="background"></div>
                 <h2>Inn- og útflutningur<h2/>
@@ -3444,24 +3145,10 @@
             </div>
         </section>
 
-        <section data-background="assets/avreidingar.jpg" data-autoslide="4000">
-            <h1><img src="assets/hagstova_logo_white.svg" alt="Hagstova Føroya" class="logo" />Avreiðingar</h1>
-        </section>
-        <section data-state="avreidingar" data-background="assets/avreidingar.jpg">
-            <div class="infobox blue">
-                <div class="background"></div>
-                <h2>Avreiðingar av botnfiski<h2/>
-                <p>í tonsum</p>
-                    <div>
-                        <div id="chart13"></div>
-                    </div>
-            </div>
-        </section>
-
-        <section data-background="assets/gistingar.jpg" data-background-transition="fade" data-autoslide="4000">
+        <section data-background="assets/gistingar_brandan.jpg" data-background-transition="fade" data-autoslide="4000">
             <h1><img src="assets/hagstova_logo_white.svg" alt="Hagstova Føroya" class="logo" />Gistingar</h1>
         </section>
-        <section data-state="gistingar" data-background="assets/gistingar.jpg">
+        <section data-state="gistingar" data-background="assets/gistingar_brandan.jpg">
             <div class="infobox blue left">
                 <div class="background"></div>
                 <h2>Gistingar<h2/>
@@ -3567,10 +3254,6 @@
 
             Reveal.addEventListener("fiskavoruutflutningur", function () {
                 startAnimatingChart8();
-            }, false);
-
-            Reveal.addEventListener("avreidingar", function () {
-                startAnimatingChart13();
             }, false);
 
             Reveal.addEventListener("gistingar", function () {
