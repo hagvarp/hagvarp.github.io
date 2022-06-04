@@ -420,7 +420,7 @@
                 var yaxistilflyting = [];
                 var yaxisfraflyting = [];
 
-                for (var i = 0; i < fLen; i++) {
+                for (var i = 0; i < fLen; i++) { 
                     tilflyting = ds.Data({ "changes": "Immigr_int", "village/city": "999999", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
                     fraflyting = ds.Data({ "changes": "Emmigr_int", "village/city": "999999", "year": ds.Dimension("year").id[i] }, false).filter(function(n) { return n; });
 
@@ -3026,7 +3026,7 @@
             <div class="infobox blue right">    
                 <div class="background"></div>
                     <h2>Fólkatal<h2/>
-                    <p>Fólktalið fyrst í hvørjum mánaði</p>
+                    <p>Fólkatalið fyrst í hvørjum mánaði</p>
                     <div>
                         <div id="chart1"></div>
                     </div>
