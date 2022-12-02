@@ -2767,7 +2767,7 @@
                 year = ds.Dimension("year").id;
 
                 var fLen = year.length;
-                q = ds.Dimension("quarter").id;
+                q = ds.Dimension("time").id;
 
                 //Format Data
                 var pristaldata = [];
@@ -2955,7 +2955,7 @@
                               }
                             },
                             {
-                              "code": "quarter",
+                              "code": "time",
                               "selection": {
                                 "filter": "item",
                                 "values": [
