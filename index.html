@@ -36,21 +36,22 @@
         </script>
 
 
-	<!-- Analytics -->
-	<script type="text/javascript">
-	  var _paq = _paq || [];
-	  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-	  _paq.push(['trackPageView']);
-	  _paq.push(['enableLinkTracking']);
-	  (function() {
-	    var u="https://analytics.hagstova.fo/";
-	    _paq.push(['setTrackerUrl', u+'piwik.php']);
-	    _paq.push(['setSiteId', '1']);
-	    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-	    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-	  })();
-	</script>
-	<!-- End Analytics Code -->
+<!-- Matomo -->
+<script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//hagstova.fo/matomo/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '5']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+<!-- End Matomo Code -->
+  
 
 
 </head>
@@ -2261,7 +2262,7 @@
                         }
                         onnurfiskaslogdata.push([Date.parse(year[i] + "-" + month), (onnurfiskaslog[j] + raekjur[j])*0.001]);
 
-                        console.log(onnurfiskaslogdata);
+   
 
                         toskurhysaupsidata.push([Date.parse(year[i] + "-" + month), (toskur[j] + hysa[j] + upsi[j])*0.001]);
                         alifiskurdata.push([Date.parse(year[i] + "-" + month), (laksur[j] + sil[j])*0.001]);
@@ -2767,7 +2768,7 @@
                 year = ds.Dimension("year").id;
 
                 var fLen = year.length;
-                q = ds.Dimension("time").id;
+                q = ds.Dimension("period").id;
 
                 //Format Data
                 var pristaldata = [];
@@ -2953,18 +2954,6 @@
                                   "CPI"
                                 ]
                               }
-                            },
-                            {
-                              "code": "time",
-                              "selection": {
-                                "filter": "item",
-                                "values": [
-                                  "Q1",
-                                  "Q2",
-                                  "Q3",
-                                  "Q4"
-                                ]
-                              }
                             }
 
 
@@ -3010,7 +2999,7 @@
                 loadDataAndBuildChart9();
                 loadDataAndBuildChart10();
 
-                loadDataAndBuildChart13();
+                
             });
 </script>
 
