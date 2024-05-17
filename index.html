@@ -2944,14 +2944,14 @@
             }
 
             function loadDataAndBuildChart10() {
-                POST("https://statbank.hagstova.fo/api/v1/fo/H2/IP/IP02/pris_hovb.px", {
+                POST("https://statbank.hagstova.fo:443/api/v1/fo/H2/IP/IP02/pris_alt.px", {
                     "query": [
                             {
-                              "code": "commodity groups",
+                              "code": "measure",
                               "selection": {
                                 "filter": "item",
                                 "values": [
-                                  "CPI"
+                                  "INDEX"
                                 ]
                               }
                             }
@@ -3007,6 +3007,17 @@
 
 <div class="reveal">
     <div class="slides">
+
+        <section data-state="folkatal" data-background="assets/folkatal_havn.jpg">
+            <div class="infobox blue center">    
+                <div class="background"></div>
+                    
+                    <div>Fólkatalið fyrst í hvørjum mánaði</div>
+                    
+            </div>
+        </section>
+
+
 
         <section data-background="assets/folkatal_havn.jpg" data-autoslide="4000">
             <h1><img src="assets/hagstova_logo_white.svg" alt="Hagstova Føroya" class="logo" />Fólkatal</h1>
