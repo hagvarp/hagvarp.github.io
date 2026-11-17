@@ -2787,7 +2787,7 @@ var chart4b;
             }
 
             function loadDataAndBuildChart9() {
-                POST("https://statbank.hagstova.fo:443/api/v1/en/H2/VV/VV07/gist_gist_md.px", {
+                POST("https://statbank.hagstova.fo:443/api/v1/en/H2/VV/VV07/Gisting/gist_gist_md.px", {
                   "query": [
                     {
                       "code": "measure",
@@ -3022,10 +3022,10 @@ var chart4b;
             }
 
             function loadDataAndBuildChart10() {
-                POST("https://statbank.hagstova.fo:443/api/v1/fo/H2/IP/IP02/pris_alt.px", {
+                POST("https://statbank.hagstova.fo:443/api/v1/fo/H2/IP/IP02/pris_alt_t.px", {
                     "query": [
                             {
-                              "code": "measure",
+                              "code": "Measure",
                               "selection": {
                                 "filter": "item",
                                 "values": [
@@ -3220,7 +3220,7 @@ var chart4b;
             <div class="infobox blue left">
                 <div class="background"></div>
                 <h2>Gistingar<h2/>
-                <p>Gistinætur</p>
+                <p>Fólkanætur, nýttar</p>
                     <div>
                         <div id="chart9"></div>
                     </div>
